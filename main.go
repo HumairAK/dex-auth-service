@@ -148,7 +148,6 @@ func (a *app) oauth2Config() *oauth2.Config {
 }
 
 func (a *app) handleLogin(w http.ResponseWriter, r *http.Request) {
-
 	authCodeURL := a.oauth2Config().AuthCodeURL(a.state, oauth2.AccessTypeOffline)
 	http.Redirect(w, r, authCodeURL, http.StatusSeeOther)
 }
