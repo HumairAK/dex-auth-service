@@ -18,22 +18,6 @@ input { display: table-cell; }
   <body>
     <form action="/login" method="post">
       <p>
-        <label> Authenticate for: </label>
-        <input type="text" name="cross_client" placeholder="list of client-ids">
-      </p>
-      <p>
-        <label>Extra scopes: </label>
-        <input type="text" name="extra_scopes" placeholder="list of scopes">
-      </p>
-      <p>
-        <label>Connector ID: </label>
-        <input type="text" name="connector_id" placeholder="connector id">
-      </p>
-      <p>
-        <label>Request offline access: </label>
-        <input type="checkbox" name="offline_access" value="yes" checked>
-      </p>
-      <p>
 	    <input type="submit" value="Login">
       </p>
     </form>
@@ -66,27 +50,14 @@ pre {
     </style>
   </head>
   <body>
-    <p> ID Token: <pre><code>{{ .IDToken }}</code></pre></p>
     <p> Access Token: <pre><code>{{ .AccessToken }}</code></pre></p>
-    <p> Claims: <pre><code>{{ .Claims }}</code></pre></p>
-	{{ if .RefreshToken }}
-    <p> Refresh Token: <pre><code>{{ .RefreshToken }}</code></pre></p>
-	<form action="{{ .RedirectURL }}" method="post">
-	  <input type="hidden" name="refresh_token" value="{{ .RefreshToken }}">
-	  <input type="submit" value="Redeem refresh token">
-    </form>
-	{{ end }}
   </body>
 </html>
 `))
 
-func renderToken(w http.ResponseWriter, redirectURL, idToken, accessToken, refreshToken, claims string) {
+func renderToken(w http.ResponseWriter, accessToken string) {
 	renderTemplate(w, tokenTmpl, tokenTmplData{
-		IDToken:      idToken,
 		AccessToken:  accessToken,
-		RefreshToken: refreshToken,
-		RedirectURL:  redirectURL,
-		Claims:       claims,
 	})
 }
 
