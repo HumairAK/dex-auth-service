@@ -65,8 +65,8 @@ func cmd() *cobra.Command {
 		debug     bool
 	)
 	c := cobra.Command{
-		Use:   "example-app",
-		Short: "An example OpenID Connect client",
+		Use:   "dex-token-grab",
+		Short: "An OpenID Connect client for fetching tokens on behave of other trustee apps.",
 		Long:  "",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) != 0 {
