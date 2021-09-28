@@ -7,22 +7,54 @@ import (
 )
 
 var indexTmpl = template.Must(template.New("index.html").Parse(`<html>
-  <head>
-    <style>
-form  { display: table;      }
-p     { display: table-row;  }
-label { display: table-cell; }
-input { display: table-cell; }
-    </style>
-  </head>
-  <body>
-    <form action="/login" method="post">
-      <p>
-	    <input type="submit" value="Login">
-      </p>
-    </form>
-  </body>
+<head>
+<style>
+html, body {
+    height: 100%;
+}
+body {
+    margin: 0;
+}
+.flex-container {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.row {
+    width: auto;
+}
+.flex-item {
+    padding: 5px;
+    margin: 10px;
+    color: #757575;
+    font-weight: bold;
+    font-size: 2em;
+    text-align: center;
+}
+input {
+height: 50;
+width: 250;
+cursor: pointer;
+font-size: 20;
+color: #444
+}
+</style>
+</head>
+<body>
+<div class="flex-container">
+    <div class="row"> 
+        <div class="flex-item"> Token Retrieval </div>
+		<form action="/login" method="post" class="flex-item">
+			<input type="submit" value="Login">
+		</form>
+    </div>
+</div>
+</body>
 </html>`))
+
 
 func renderIndex(w http.ResponseWriter) {
 	renderTemplate(w, indexTmpl, nil)
